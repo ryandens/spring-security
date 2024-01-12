@@ -16,6 +16,7 @@
 
 package org.springframework.security.concurrent;
 
+import java.security.SecureRandom;
 import junit.framework.TestCase;
 
 import java.util.Set;
@@ -29,7 +30,7 @@ import java.util.Random;
  * @author Luke Taylor
  */
 public class SessionRegistryImplMTTests extends TestCase {
-	private static final Random rnd = new Random();
+	private static final Random rnd = new SecureRandom();
 	private static boolean errorOccurred;
 
 	protected void setUp() throws Exception {
