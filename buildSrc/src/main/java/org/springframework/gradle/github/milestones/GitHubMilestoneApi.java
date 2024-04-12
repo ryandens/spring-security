@@ -170,7 +170,7 @@ public class GitHubMilestoneApi {
 		if (snapshotVersion.find()) {
 			String patchSegment = snapshotVersion.group(3);
 			String currentVersionNoIdentifier = currentVersion.replace("-SNAPSHOT", "");
-			if (patchSegment.equals("0")) {
+			if ("0".equals(patchSegment)) {
 				String nextPreRelease = getNextPreRelease(repositoryRef, currentVersionNoIdentifier);
 				return nextPreRelease != null ? nextPreRelease : currentVersionNoIdentifier;
 			}

@@ -156,10 +156,10 @@ public class LdapShaPasswordEncoder implements PasswordEncoder {
 	}
 
 	private byte[] getSalt(String encodedPassword, String prefix) {
-		if (prefix.equals(SSHA_PREFIX) || prefix.equals(SSHA_PREFIX_LC)) {
+		if (SSHA_PREFIX.equals(prefix) || SSHA_PREFIX_LC.equals(prefix)) {
 			return extractSalt(encodedPassword);
 		}
-		if (!prefix.equals(SHA_PREFIX) && !prefix.equals(SHA_PREFIX_LC)) {
+		if (!SHA_PREFIX.equals(prefix) && !SHA_PREFIX_LC.equals(prefix)) {
 			throw new IllegalArgumentException("Unsupported password prefix '" + prefix + "'");
 		}
 		// Standard SHA

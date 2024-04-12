@@ -156,7 +156,7 @@ public class JdbcAclService implements AclService {
 		this.aclClassIdSupported = aclClassIdSupported;
 		if (aclClassIdSupported) {
 			// Change the default children select if it hasn't been overridden
-			if (this.findChildrenSql.equals(DEFAULT_SELECT_ACL_WITH_PARENT_SQL)) {
+			if (DEFAULT_SELECT_ACL_WITH_PARENT_SQL.equals(this.findChildrenSql)) {
 				this.findChildrenSql = DEFAULT_SELECT_ACL_WITH_PARENT_SQL_WITH_CLASS_ID_TYPE;
 			}
 			else {

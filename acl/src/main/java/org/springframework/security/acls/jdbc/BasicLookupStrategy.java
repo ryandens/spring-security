@@ -485,7 +485,7 @@ public class BasicLookupStrategy implements LookupStrategy {
 
 	public final void setAclClassIdSupported(boolean aclClassIdSupported) {
 		if (aclClassIdSupported) {
-			Assert.isTrue(this.selectClause.equals(DEFAULT_SELECT_CLAUSE),
+			Assert.isTrue(DEFAULT_SELECT_CLAUSE.equals(this.selectClause),
 					"Cannot set aclClassIdSupported and override the select clause; "
 							+ "just override the select clause");
 			this.selectClause = DEFAULT_ACL_CLASS_ID_SELECT_CLAUSE;

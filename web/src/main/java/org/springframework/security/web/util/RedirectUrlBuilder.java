@@ -77,7 +77,7 @@ public class RedirectUrlBuilder {
 		Assert.notNull(this.serverName, "serverName cannot be null");
 		sb.append(this.scheme).append("://").append(this.serverName);
 		// Append the port number if it's not standard for the scheme
-		if (this.port != (this.scheme.equals("http") ? 80 : 443)) {
+		if (this.port != ("http".equals(this.scheme) ? 80 : 443)) {
 			sb.append(":").append(this.port);
 		}
 		if (this.contextPath != null) {

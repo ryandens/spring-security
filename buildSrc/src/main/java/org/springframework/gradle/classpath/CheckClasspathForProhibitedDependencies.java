@@ -69,28 +69,28 @@ public class CheckClasspathForProhibitedDependencies extends DefaultTask {
 
 	private boolean prohibited(ModuleVersionIdentifier id) {
 		String group = id.getGroup();
-		if (group.equals("javax.batch")) {
+		if ("javax.batch".equals(group)) {
 			return false;
 		}
-		if (group.equals("javax.cache")) {
+		if ("javax.cache".equals(group)) {
 			return false;
 		}
-		if (group.equals("javax.money")) {
+		if ("javax.money".equals(group)) {
 			return false;
 		}
 		if (group.startsWith("javax")) {
 			return true;
 		}
-		if (group.equals("commons-logging")) {
+		if ("commons-logging".equals(group)) {
 			return true;
 		}
-		if (group.equals("org.slf4j") && id.getName().equals("jcl-over-slf4j")) {
+		if ("org.slf4j".equals(group) && id.getName().equals("jcl-over-slf4j")) {
 			return true;
 		}
 		if (group.startsWith("org.jboss.spec")) {
 			return true;
 		}
-		if (group.equals("org.apache.geronimo.specs")) {
+		if ("org.apache.geronimo.specs".equals(group)) {
 			return true;
 		}
 		return false;

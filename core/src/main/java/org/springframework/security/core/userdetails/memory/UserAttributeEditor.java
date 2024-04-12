@@ -45,10 +45,10 @@ public class UserAttributeEditor extends PropertyEditorSupport {
 				userAttrib.setPassword(currentToken);
 			}
 			else {
-				if (currentToken.toLowerCase().equals("enabled")) {
+				if ("enabled".equals(currentToken.toLowerCase())) {
 					userAttrib.setEnabled(true);
 				}
-				else if (currentToken.toLowerCase().equals("disabled")) {
+				else if ("disabled".equals(currentToken.toLowerCase())) {
 					userAttrib.setEnabled(false);
 				}
 				else {

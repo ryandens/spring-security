@@ -84,7 +84,7 @@ public class BasicAuthenticationConverter implements AuthenticationConverter {
 		if (!StringUtils.startsWithIgnoreCase(header, AUTHENTICATION_SCHEME_BASIC)) {
 			return null;
 		}
-		if (header.equalsIgnoreCase(AUTHENTICATION_SCHEME_BASIC)) {
+		if (AUTHENTICATION_SCHEME_BASIC.equalsIgnoreCase(header)) {
 			throw new BadCredentialsException("Empty basic authentication token");
 		}
 		byte[] base64Token = header.substring(6).getBytes(StandardCharsets.UTF_8);

@@ -468,8 +468,8 @@ class HttpConfigurationBuilder {
 			// SEC-1424: do nothing
 			return;
 		}
-		boolean sessionFixationProtectionRequired = !sessionFixationAttribute
-			.equals(OPT_SESSION_FIXATION_NO_PROTECTION);
+		boolean sessionFixationProtectionRequired = !OPT_SESSION_FIXATION_NO_PROTECTION
+			.equals(sessionFixationAttribute);
 		ManagedList<BeanMetadataElement> delegateSessionStrategies = new ManagedList<>();
 		BeanDefinitionBuilder concurrentSessionStrategy;
 		BeanDefinitionBuilder sessionFixationStrategy = null;
@@ -531,7 +531,7 @@ class HttpConfigurationBuilder {
 		if (!StringUtils.hasText(sessionAuthStratRef) && sessionFixationStrategy != null && !useChangeSessionId) {
 			if (sessionFixationProtectionRequired) {
 				sessionFixationStrategy.addPropertyValue("migrateSessionAttributes",
-						sessionFixationAttribute.equals(OPT_SESSION_FIXATION_MIGRATE_SESSION));
+						OPT_SESSION_FIXATION_MIGRATE_SESSION.equals(sessionFixationAttribute));
 			}
 		}
 		if (!delegateSessionStrategies.isEmpty()) {

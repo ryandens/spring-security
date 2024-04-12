@@ -87,15 +87,15 @@ public class SecurityContextHolder {
 			// Set default
 			strategyName = MODE_THREADLOCAL;
 		}
-		if (strategyName.equals(MODE_THREADLOCAL)) {
+		if (MODE_THREADLOCAL.equals(strategyName)) {
 			strategy = new ThreadLocalSecurityContextHolderStrategy();
 			return;
 		}
-		if (strategyName.equals(MODE_INHERITABLETHREADLOCAL)) {
+		if (MODE_INHERITABLETHREADLOCAL.equals(strategyName)) {
 			strategy = new InheritableThreadLocalSecurityContextHolderStrategy();
 			return;
 		}
-		if (strategyName.equals(MODE_GLOBAL)) {
+		if (MODE_GLOBAL.equals(strategyName)) {
 			strategy = new GlobalSecurityContextHolderStrategy();
 			return;
 		}
