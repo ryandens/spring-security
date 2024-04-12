@@ -16,6 +16,7 @@
 
 package s101;
 
+import io.github.pixee.security.ZipSecurity;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -182,7 +183,7 @@ public class S101Configurer {
 	}
 
 	private void copyZipToFilesystem(String source, File destination, String name) {
-		try (ZipInputStream in = new ZipInputStream(new URL(source + "/" + name + ".zip").openStream())) {
+		try (ZipInputStream in = ZipSecurity.createHardenedInputStream(new URL(source + "/" + name + ".zip").openStream())) {
 			ZipEntry entry;
 			String build = destination.getName();
 			int entries = 0;
