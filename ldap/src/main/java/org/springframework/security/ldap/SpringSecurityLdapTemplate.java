@@ -300,7 +300,7 @@ public class SpringSecurityLdapTemplate extends LdapTemplate {
 	 */
 	private static SearchControls buildControls(SearchControls originalControls) {
 		return new SearchControls(originalControls.getSearchScope(), originalControls.getCountLimit(),
-				originalControls.getTimeLimit(), originalControls.getReturningAttributes(), RETURN_OBJECT,
+				originalControls.getTimeLimit(), originalControls.getReturningAttributes(), false,
 				originalControls.getDerefLinkFlag());
 	}
 
