@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.header.writers;
 
+import io.github.pixee.security.Newlines;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
@@ -73,7 +74,7 @@ public final class ClearSiteDataHeaderWriter implements HeaderWriter {
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
 		if (this.requestMatcher.matches(request)) {
 			if (!response.containsHeader(CLEAR_SITE_DATA_HEADER)) {
-				response.setHeader(CLEAR_SITE_DATA_HEADER, this.headerValue);
+				response.setHeader(CLEAR_SITE_DATA_HEADER, Newlines.stripAll(this.headerValue));
 			}
 		}
 		this.logger.debug(

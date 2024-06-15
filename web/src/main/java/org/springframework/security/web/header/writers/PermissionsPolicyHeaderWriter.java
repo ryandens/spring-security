@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.header.writers;
 
+import io.github.pixee.security.Newlines;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -70,7 +71,7 @@ public final class PermissionsPolicyHeaderWriter implements HeaderWriter {
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
 		if (!response.containsHeader(PERMISSIONS_POLICY_HEADER)) {
-			response.setHeader(PERMISSIONS_POLICY_HEADER, this.policy);
+			response.setHeader(PERMISSIONS_POLICY_HEADER, Newlines.stripAll(this.policy));
 		}
 	}
 
