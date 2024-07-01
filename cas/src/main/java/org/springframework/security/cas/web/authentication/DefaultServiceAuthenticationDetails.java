@@ -16,6 +16,8 @@
 
 package org.springframework.security.cas.web.authentication;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Pattern;
@@ -51,7 +53,7 @@ final class DefaultServiceAuthenticationDetails extends WebAuthenticationDetails
 	DefaultServiceAuthenticationDetails(String casService, HttpServletRequest request, Pattern artifactPattern)
 			throws MalformedURLException {
 		super(request);
-		URL casServiceUrl = new URL(casService);
+		URL casServiceUrl = Urls.create(casService, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 		int port = getServicePort(casServiceUrl);
 		final String query = getQueryString(request, artifactPattern);
 		this.serviceUrl = UrlUtils.buildFullRequestUrl(casServiceUrl.getProtocol(), casServiceUrl.getHost(), port,
