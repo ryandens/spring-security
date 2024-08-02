@@ -71,7 +71,7 @@ public class RncToXsd extends DefaultTask {
 				TransformerFactory tFactory = new TransformerFactoryImpl();
 				Transformer transformer = tFactory.newTransformer(new StreamSource(xslPath));
 
-				File temp = File.createTempFile("gradle-trang-" + xsdFile.getName(), ".xsd");
+				File temp = Files.createTempFile("gradle-trang-" + xsdFile.getName(), ".xsd").toFile();
 
 				Files.copy(xsdFile.toPath(), temp.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				StreamSource xmlSource = new StreamSource(temp);
