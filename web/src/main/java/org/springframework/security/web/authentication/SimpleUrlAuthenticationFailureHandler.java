@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.authentication;
 
+import static io.github.pixee.security.jakarta.PathValidator.validateDispatcherPath;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
@@ -88,7 +89,7 @@ public class SimpleUrlAuthenticationFailureHandler implements AuthenticationFail
 		saveException(request, exception);
 		if (this.forwardToDestination) {
 			this.logger.debug("Forwarding to " + this.defaultFailureUrl);
-			request.getRequestDispatcher(this.defaultFailureUrl).forward(request, response);
+			request.getRequestDispatcher(validateDispatcherPath(this.defaultFailureUrl)).forward(request, response);
 		}
 		else {
 			this.redirectStrategy.sendRedirect(request, response, this.defaultFailureUrl);

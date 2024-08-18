@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.authentication.logout;
 
+import static io.github.pixee.security.jakarta.PathValidator.validateDispatcherPath;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
@@ -49,7 +50,7 @@ public class ForwardLogoutSuccessHandler implements LogoutSuccessHandler {
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		request.getRequestDispatcher(this.targetUrl).forward(request, response);
+		request.getRequestDispatcher(validateDispatcherPath(this.targetUrl)).forward(request, response);
 	}
 
 }

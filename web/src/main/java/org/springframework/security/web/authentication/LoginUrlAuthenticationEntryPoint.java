@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.authentication;
 
+import static io.github.pixee.security.jakarta.PathValidator.validateDispatcherPath;
 import java.io.IOException;
 
 import jakarta.servlet.RequestDispatcher;
@@ -136,7 +137,7 @@ public class LoginUrlAuthenticationEntryPoint implements AuthenticationEntryPoin
 		}
 		String loginForm = determineUrlToUseForThisRequest(request, response, authException);
 		logger.debug(LogMessage.format("Server side forward to: %s", loginForm));
-		RequestDispatcher dispatcher = request.getRequestDispatcher(loginForm);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(validateDispatcherPath(loginForm));
 		dispatcher.forward(request, response);
 		return;
 	}
