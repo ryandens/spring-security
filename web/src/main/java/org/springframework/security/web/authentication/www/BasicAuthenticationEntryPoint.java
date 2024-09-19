@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.authentication.www;
 
+import io.github.pixee.security.Newlines;
 import java.io.IOException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -52,7 +53,7 @@ public class BasicAuthenticationEntryPoint implements AuthenticationEntryPoint, 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException {
-		response.setHeader("WWW-Authenticate", "Basic realm=\"" + this.realmName + "\"");
+		response.setHeader("WWW-Authenticate", Newlines.stripAll("Basic realm=\"" + this.realmName + "\""));
 		response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
 	}
 
