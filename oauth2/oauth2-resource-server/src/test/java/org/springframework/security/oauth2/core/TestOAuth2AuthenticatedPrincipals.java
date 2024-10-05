@@ -16,6 +16,8 @@
 
 package org.springframework.security.oauth2.core;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URL;
@@ -64,7 +66,7 @@ public final class TestOAuth2AuthenticatedPrincipals {
 
 	private static URL url(String url) {
 		try {
-			return new URL(url);
+			return Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 		}
 		catch (IOException ex) {
 			throw new UncheckedIOException(ex);

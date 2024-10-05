@@ -16,6 +16,8 @@
 
 package org.springframework.security.web.savedrequest;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.URL;
 
 import org.junit.jupiter.api.Test;
@@ -64,7 +66,7 @@ public class DefaultSavedRequestTests {
 		DefaultSavedRequest savedRequest = new DefaultSavedRequest(new MockHttpServletRequest(),
 				new MockPortResolver(8080, 8443));
 		assertThat(savedRequest.getParameterMap()).doesNotContainKey("success");
-		assertThat(new URL(savedRequest.getRedirectUrl())).hasNoQuery();
+		assertThat(Urls.create(savedRequest.getRedirectUrl(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS)).hasNoQuery();
 	}
 
 	@Test
@@ -73,7 +75,7 @@ public class DefaultSavedRequestTests {
 		request.setQueryString("foo=bar");
 		DefaultSavedRequest savedRequest = new DefaultSavedRequest(request, new MockPortResolver(8080, 8443), null);
 		assertThat(savedRequest.getParameterMap()).doesNotContainKey("success");
-		assertThat(new URL(savedRequest.getRedirectUrl())).hasQuery("foo=bar");
+		assertThat(Urls.create(savedRequest.getRedirectUrl(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS)).hasQuery("foo=bar");
 	}
 
 	@Test
@@ -81,7 +83,7 @@ public class DefaultSavedRequestTests {
 		DefaultSavedRequest savedRequest = new DefaultSavedRequest(new MockHttpServletRequest(),
 				new MockPortResolver(8080, 8443), null);
 		assertThat(savedRequest.getParameterMap()).doesNotContainKey("success");
-		assertThat(new URL(savedRequest.getRedirectUrl())).hasNoQuery();
+		assertThat(Urls.create(savedRequest.getRedirectUrl(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS)).hasNoQuery();
 	}
 
 	@Test
@@ -89,7 +91,7 @@ public class DefaultSavedRequestTests {
 		DefaultSavedRequest savedRequest = new DefaultSavedRequest(new MockHttpServletRequest(),
 				new MockPortResolver(8080, 8443), "success");
 		assertThat(savedRequest.getParameterMap()).doesNotContainKey("success");
-		assertThat(new URL(savedRequest.getRedirectUrl())).hasQuery("success");
+		assertThat(Urls.create(savedRequest.getRedirectUrl(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS)).hasQuery("success");
 	}
 
 	@Test
@@ -99,7 +101,7 @@ public class DefaultSavedRequestTests {
 		DefaultSavedRequest savedRequest = new DefaultSavedRequest(request, new MockPortResolver(8080, 8443),
 				"success");
 		assertThat(savedRequest.getParameterMap()).doesNotContainKey("success");
-		assertThat(new URL(savedRequest.getRedirectUrl())).hasQuery("success");
+		assertThat(Urls.create(savedRequest.getRedirectUrl(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS)).hasQuery("success");
 	}
 
 	@Test
@@ -109,7 +111,7 @@ public class DefaultSavedRequestTests {
 		DefaultSavedRequest savedRequest = new DefaultSavedRequest(request, new MockPortResolver(8080, 8443),
 				"success");
 		assertThat(savedRequest.getParameterMap()).doesNotContainKey("success");
-		assertThat(new URL(savedRequest.getRedirectUrl())).hasQuery("foo=bar&success");
+		assertThat(Urls.create(savedRequest.getRedirectUrl(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS)).hasQuery("foo=bar&success");
 	}
 
 	@Test
@@ -119,7 +121,7 @@ public class DefaultSavedRequestTests {
 		DefaultSavedRequest savedRequest = new DefaultSavedRequest(request, new MockPortResolver(8080, 8443),
 				"success");
 		assertThat(savedRequest.getParameterMap()).doesNotContainKey("success");
-		assertThat(new URL(savedRequest.getRedirectUrl())).hasQuery("foo=bar&success");
+		assertThat(Urls.create(savedRequest.getRedirectUrl(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS)).hasQuery("foo=bar&success");
 	}
 
 	// gh-13438
