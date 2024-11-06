@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.nio.file.Files;
 import java.security.Security;
 import java.util.Arrays;
 import java.util.Collection;
@@ -124,7 +125,7 @@ public class JaasAuthenticationProviderTests {
 			configDir.delete();
 		}
 		configDir.mkdir();
-		configFile = File.createTempFile("login", "conf", configDir);
+		configFile = Files.createTempFile(configDir.toPath(), "login", "conf").toFile();
 		configFile.deleteOnExit();
 		FileOutputStream fos = new FileOutputStream(configFile);
 		PrintWriter pw = new PrintWriter(fos);
