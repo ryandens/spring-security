@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.authentication;
 
+import static io.github.pixee.security.jakarta.PathValidator.validateDispatcherPath;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
@@ -50,7 +51,7 @@ public class ForwardAuthenticationSuccessHandler implements AuthenticationSucces
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		request.getRequestDispatcher(this.forwardUrl).forward(request, response);
+		request.getRequestDispatcher(validateDispatcherPath(this.forwardUrl)).forward(request, response);
 	}
 
 }

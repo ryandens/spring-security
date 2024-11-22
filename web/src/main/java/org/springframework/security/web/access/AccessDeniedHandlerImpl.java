@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.access;
 
+import static io.github.pixee.security.jakarta.PathValidator.validateDispatcherPath;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
@@ -69,7 +70,7 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
 		if (logger.isDebugEnabled()) {
 			logger.debug(LogMessage.format("Forwarding to %s with status code 403", this.errorPage));
 		}
-		request.getRequestDispatcher(this.errorPage).forward(request, response);
+		request.getRequestDispatcher(validateDispatcherPath(this.errorPage)).forward(request, response);
 	}
 
 	/**
