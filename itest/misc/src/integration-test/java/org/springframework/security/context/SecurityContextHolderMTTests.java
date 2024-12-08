@@ -16,6 +16,7 @@
 
 package org.springframework.security.context;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import junit.framework.ComparisonFailure;
@@ -176,7 +177,7 @@ public class SecurityContextHolderMTTests extends TestCase{
 	private Thread makeThread(final String threadIdentifier, final boolean topLevelThread,
 		final boolean injectAuthIntoCurrentThread, final boolean expectAllThreadsToUseIdenticalAuthentication,
 		final boolean expectChildrenToShareAuthenticationWithParent, final String expectedUsername) {
-		final Random rnd = new Random();
+		final Random rnd = new SecureRandom();
 
 		Thread t = new Thread(new Runnable() {
 			public void run() {
