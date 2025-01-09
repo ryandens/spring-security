@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.header.writers;
 
+import io.github.pixee.security.Newlines;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -120,7 +121,7 @@ public final class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		String headerName = (!this.reportOnly) ? CONTENT_SECURITY_POLICY_HEADER
 				: CONTENT_SECURITY_POLICY_REPORT_ONLY_HEADER;
 		if (!response.containsHeader(headerName)) {
-			response.setHeader(headerName, this.policyDirectives);
+			response.setHeader(headerName, Newlines.stripAll(this.policyDirectives));
 		}
 	}
 

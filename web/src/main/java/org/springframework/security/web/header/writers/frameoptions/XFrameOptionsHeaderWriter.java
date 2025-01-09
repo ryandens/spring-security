@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.header.writers.frameoptions;
 
+import io.github.pixee.security.Newlines;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -89,18 +90,18 @@ public final class XFrameOptionsHeaderWriter implements HeaderWriter {
 			String allowFromValue = this.allowFromStrategy.getAllowFromValue(request);
 			if (XFrameOptionsMode.DENY.getMode().equals(allowFromValue)) {
 				if (!response.containsHeader(XFRAME_OPTIONS_HEADER)) {
-					response.setHeader(XFRAME_OPTIONS_HEADER, XFrameOptionsMode.DENY.getMode());
+					response.setHeader(XFRAME_OPTIONS_HEADER, Newlines.stripAll(XFrameOptionsMode.DENY.getMode()));
 				}
 			}
 			else if (allowFromValue != null) {
 				if (!response.containsHeader(XFRAME_OPTIONS_HEADER)) {
 					response.setHeader(XFRAME_OPTIONS_HEADER,
-							XFrameOptionsMode.ALLOW_FROM.getMode() + " " + allowFromValue);
+							Newlines.stripAll(XFrameOptionsMode.ALLOW_FROM.getMode() + " " + allowFromValue));
 				}
 			}
 		}
 		else {
-			response.setHeader(XFRAME_OPTIONS_HEADER, this.frameOptionsMode.getMode());
+			response.setHeader(XFRAME_OPTIONS_HEADER, Newlines.stripAll(this.frameOptionsMode.getMode()));
 		}
 	}
 

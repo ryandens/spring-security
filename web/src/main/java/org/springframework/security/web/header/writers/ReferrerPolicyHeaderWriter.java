@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.header.writers;
 
+import io.github.pixee.security.Newlines;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -94,7 +95,7 @@ public class ReferrerPolicyHeaderWriter implements HeaderWriter {
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
 		if (!response.containsHeader(REFERRER_POLICY_HEADER)) {
-			response.setHeader(REFERRER_POLICY_HEADER, this.policy.getPolicy());
+			response.setHeader(REFERRER_POLICY_HEADER, Newlines.stripAll(this.policy.getPolicy()));
 		}
 	}
 

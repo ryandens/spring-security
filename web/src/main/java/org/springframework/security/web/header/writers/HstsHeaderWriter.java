@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.header.writers;
 
+import io.github.pixee.security.Newlines;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
@@ -154,7 +155,7 @@ public final class HstsHeaderWriter implements HeaderWriter {
 			return;
 		}
 		if (!response.containsHeader(HSTS_HEADER_NAME)) {
-			response.setHeader(HSTS_HEADER_NAME, this.hstsHeaderValue);
+			response.setHeader(HSTS_HEADER_NAME, Newlines.stripAll(this.hstsHeaderValue));
 		}
 	}
 
