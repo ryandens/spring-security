@@ -16,6 +16,7 @@
 
 package org.springframework.security.web;
 
+import io.github.pixee.security.Newlines;
 import java.io.IOException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -64,7 +65,7 @@ public class DefaultRedirectStrategy implements RedirectStrategy {
 			response.sendRedirect(redirectUrl);
 		}
 		else {
-			response.setHeader(HttpHeaders.LOCATION, redirectUrl);
+			response.setHeader(HttpHeaders.LOCATION, Newlines.stripAll(redirectUrl));
 			response.setStatus(this.statusCode.value());
 			response.getWriter().flush();
 		}

@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.header.writers;
 
+import io.github.pixee.security.Newlines;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -48,7 +49,7 @@ public final class XXssProtectionHeaderWriter implements HeaderWriter {
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
 		if (!response.containsHeader(XSS_PROTECTION_HEADER)) {
-			response.setHeader(XSS_PROTECTION_HEADER, this.headerValue.toString());
+			response.setHeader(XSS_PROTECTION_HEADER, Newlines.stripAll(this.headerValue.toString()));
 		}
 	}
 

@@ -16,6 +16,7 @@
 
 package org.springframework.security.web.header.writers;
 
+import io.github.pixee.security.Newlines;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedHashMap;
@@ -187,7 +188,7 @@ public final class HpkpHeaderWriter implements HeaderWriter {
 		}
 		String headerName = (this.reportOnly) ? HPKP_RO_HEADER_NAME : HPKP_HEADER_NAME;
 		if (!response.containsHeader(headerName)) {
-			response.setHeader(headerName, this.hpkpHeaderValue);
+			response.setHeader(headerName, Newlines.stripAll(this.hpkpHeaderValue));
 		}
 	}
 

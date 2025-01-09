@@ -16,6 +16,7 @@
 
 package org.springframework.security.config.http;
 
+import io.github.pixee.security.Newlines;
 import java.net.URI;
 import java.util.List;
 
@@ -535,7 +536,7 @@ public class CsrfConfigTests {
 				method = { RequestMethod.HEAD, RequestMethod.TRACE, RequestMethod.OPTIONS })
 		@ResponseBody
 		String csrfInHeaderAndBody(CsrfToken token, HttpServletResponse response) {
-			response.setHeader(token.getHeaderName(), token.getToken());
+			response.setHeader(token.getHeaderName(), Newlines.stripAll(token.getToken()));
 			return csrfInBody(token);
 		}
 
